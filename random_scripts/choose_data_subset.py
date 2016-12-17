@@ -24,6 +24,15 @@ print "Top 3 Securities with highest row counts: ", topSecurities
 #Extract the data for these securities
 subset_data = full_data[full_data['security_id'].isin(topSecurities)]
 
+#Fix the data
+#As given in the forums of the competition. During the collection of data,
+#Some mistake was made and the columns bid51=bid50 and ask51=ask50
+#To remove redundancy, We'll remove the columns bid51 and ask51
+#ss they do not provide any information and even actually corrupt 
+#the data (being part of the prediction)
+subset_data = subset_data.drop('bid51', 1)
+subset_data = subset_data.drop('ask51', 1)
+
 #Save the extracted data
 subset_data.to_csv('../data/subset_data.csv')
 
