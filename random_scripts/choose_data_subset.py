@@ -1,3 +1,10 @@
+#The full data is not easy to explor due to large number of rows! --> size = (754018, 307)
+#So, we only choose a subset of data to explor and study.
+
+#We start by choosing only top 3 security data --> final shape = (108412, 307)
+#and then split it into test and training set (75%-25% stratified split on the security) and 
+#save everything into their respective CSV files
+
 import pandas as pd
 import numpy as np
 
