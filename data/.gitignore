@@ -1,2 +1,4 @@
 #ignore data files
 *.csv
+*.zip
+*.7z
