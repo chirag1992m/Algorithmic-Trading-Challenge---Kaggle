@@ -1,6 +1,9 @@
+#Python Notebook checkpoints
+*.ipynb_checkpoints*
+
 # Windows image file caches
 Thumbs.db
-ehthumbs.db
+thumbs.db
 
 # Folder config file
 Desktop.ini
