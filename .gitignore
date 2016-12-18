@@ -3,6 +3,9 @@
 *.zip
 *.7z
 
+#ignore output files
+*.output
+
 #Python Notebook checkpoints
 *.ipynb_checkpoints*
 
