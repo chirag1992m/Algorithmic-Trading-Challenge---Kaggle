@@ -69,7 +69,8 @@ print "Training..."
 LR_model = lm.LinearRegression(fit_intercept=True, normalize=False, n_jobs=-1)
 LR_model.fit(trainX, trainY)
 
-pickle.dump(LR_model, '../run_models/LR.model', -1)
+with open('../run_models/LR.model', 'wb') as output:
+	pickle.dump(LR_model, output, -1)
 
 #Create the prediction file
 print "Predicting..."

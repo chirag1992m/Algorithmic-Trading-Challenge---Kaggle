@@ -81,7 +81,8 @@ RF_model = ensemble.RandomForestRegressor(n_estimators=200,
 	warm_start=False)
 RF_model.fit(trainX, trainY)
 
-pickle.dump(RF_model, '../run_models/RF.model', -1)
+with open('../run_models/RF.model', 'wb') as output:
+	pickle.dump(LR_model, output, -1)
 
 #Create the prediction file
 print "Predicting..."
