@@ -6,7 +6,10 @@ import pandas as pd
 import numpy as np
 from sklearn import ensemble
 
+import pickle
+
 #Read the data
+print "Loading data..."
 train_table = pd.DataFrame.from_csv('../data/subset_train_OHE.csv')
 test_table = pd.DataFrame.from_csv('../data/subset_test_OHE.csv')
 
@@ -28,6 +31,7 @@ trainY = np.zeros((train_table.shape[0] * 2))
 
 testX = np.zeros((test_table.shape[0] * 2, len(featureColumns) + 1))
 
+print "Creating Predictors..."
 index = 0
 for ix, row in train_table.iterrows():
 	X_features = (np.array(row[featureColumns])).flatten('F')
@@ -59,6 +63,7 @@ for ix, row in test_table.iterrows():
 
 
 #Make the model and fit
+print "Training..."
 RF_model = ensemble.RandomForestRegressor(n_estimators=200,
 	criterion='mse',
 	max_depth=200,
@@ -76,7 +81,10 @@ RF_model = ensemble.RandomForestRegressor(n_estimators=200,
 	warm_start=False)
 RF_model.fit(trainX, trainY)
 
+pickle.dump(RF_model, '../run_models/RF.model', -1)
+
 #Create the prediction file
+print "Predicting..."
 testY = RF_model.predict(testX)
 prediction = pd.DataFrame.from_csv('../predictions/template_prediction.csv')
 
@@ -98,3 +106,5 @@ for ix, row in test_table.iterrows():
 			prediction.set_value(index_in_pred, column, ask)
 
 prediction.to_csv('../predictions/RF.csv')
+
+print "Done!"
