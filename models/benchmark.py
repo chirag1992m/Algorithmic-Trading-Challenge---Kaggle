@@ -6,6 +6,8 @@
 import numpy as np
 import pandas as pd
 
+test_set = pd.DataFrame.from_csv('../data/subset_test.csv')
+
 prediction = pd.DataFrame.from_csv('../predictions/template_prediction.csv')
 
 for ix, row in prediction.iterrows():
