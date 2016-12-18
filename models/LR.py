@@ -1,10 +1,18 @@
+#Check notebook: Linear_Regression.ipynb
+
+#A simple linear regression model.
+#Generates the first ask and bid which is copied
+#across the all the upcoming bid and ask
+#as prediction
 import pandas as pd
 import numpy as np
 from sklearn import linear_model as lm
 
+#Read the data
 train_table = pd.DataFrame.from_csv('../data/subset_train_OHE.csv')
 test_table = pd.DataFrame.from_csv('../data/subset_test_OHE.csv')
 
+#generate the preditors and prediction columns
 predictionColumns = []
 for i in range(52, 101):
 	for column in train_table.columns.values:
@@ -16,6 +24,7 @@ for column in train_table.columns.values:
 	if ((column not in predictionColumns) and (column != 'row_id') and (not column.startswith('time'))):
 		featureColumns.append(column)
 
+#Generate the predictors from the data
 trainX = np.zeros((train_table.shape[0] * 2, len(featureColumns) + 1))
 trainY = np.zeros((train_table.shape[0] * 2))
 
@@ -24,14 +33,14 @@ testX = np.zeros((test_table.shape[0] * 2, len(featureColumns) + 1))
 index = 0
 for ix, row in train_table.iterrows():
 	X_features = (np.array(row[featureColumns])).flatten('F')
-	X = np.concatenate((X_features, np.array([0])))
+	X = np.concatenate((X_features, np.array([0]))) #Adding the 0 for bid
 	Y = row[predictionColumns[0]]
 	trainX[index, :] = X
 	trainY[index] = Y
 
 	index = index+1
 
-	X = np.concatenate((X_features, np.array([1])))
+	X = np.concatenate((X_features, np.array([1]))) #Adding the 1 for ask
 	Y = row[predictionColumns[1]]
 	trainX[index, :] = X
 	trainY[index] = Y
@@ -51,10 +60,11 @@ for ix, row in test_table.iterrows():
 	index = index+1
 
 
+#Make the model and fit
 LR_model = lm.LinearRegression(fit_intercept=True, normalize=False, n_jobs=-1)
 LR_model.fit(trainX, trainY)
 
-
+#Create the prediction file
 testY = LR_model.predict(testX)
 prediction = pd.DataFrame.from_csv('../predictions/template_prediction.csv')
 
