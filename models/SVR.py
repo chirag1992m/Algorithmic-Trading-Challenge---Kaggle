@@ -1,10 +1,10 @@
-#A simple Random Forest Regressor model.
+#A simple Support Vector Regressor model.
 #Generates the first ask and bid which is copied
 #across the all the upcoming bid and ask
 #as prediction
 import pandas as pd
 import numpy as np
-from sklearn import ensemble
+from sklearn import svm
 
 import pickle
 
@@ -64,29 +64,25 @@ for ix, row in test_table.iterrows():
 
 #Make the model and fit
 print "Training..."
-RF_model = ensemble.RandomForestRegressor(n_estimators=200,
-	criterion='mse',
-	max_depth=200,
-	min_samples_split=2, 
-	min_samples_leaf=1, 
-	min_weight_fraction_leaf=0.0, 
-	max_features='auto', 
-	max_leaf_nodes=None, 
-	min_impurity_split=1e-07, 
-	bootstrap=True, 
-	oob_score=False, 
-	n_jobs=-1, 
-	random_state=None, 
-	verbose=1, 
-	warm_start=False)
-RF_model.fit(trainX, trainY)
+SVR_model = svm.SVR(kernel='rbf', 
+	degree=3, 
+	gamma='auto', 
+	coef0=0.0, 
+	tol=0.001, 
+	C=1.0, 
+	epsilon=0.1, 
+	shrinking=True, 
+	cache_size=5000,
+	verbose=True, 
+	max_iter=-1)
+SVR_model.fit(trainX, trainY)
 
-with open('../run_models/RF.model', 'wb') as output:
-	pickle.dump(RF_model, output, -1)
+with open('../run_models/SVR.model', 'wb') as output:
+	pickle.dump(SVR_model, output, -1)
 
 #Create the prediction file
 print "Predicting..."
-testY = RF_model.predict(testX)
+testY = SVR_model.predict(testX)
 prediction = pd.DataFrame.from_csv('../predictions/template_prediction.csv')
 
 i = 0
@@ -106,6 +102,6 @@ for ix, row in test_table.iterrows():
 		else:
 			prediction.set_value(index_in_pred, column, ask)
 
-prediction.to_csv('../predictions/RF.csv')
+prediction.to_csv('../predictions/SVR.csv')
 
 print "Done!"
