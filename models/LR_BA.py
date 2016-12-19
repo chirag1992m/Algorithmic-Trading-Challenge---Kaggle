@@ -48,8 +48,8 @@ print "Creating Predictors..."
 index = 0
 for ix, row in train_table.iterrows():
 	X = (np.array(row[featureColumns])).flatten('F')
-	Y_bid = row[predictionColumns[0]]
-	Y_ask = row[predictionColumns[1]]
+	Y_bid = row[bidPredictionColumns[0]]
+	Y_ask = row[askPredictionColumns[0]]
 
 	trainX[index, :] = X
 	trainY_ask[index] = Y_ask
