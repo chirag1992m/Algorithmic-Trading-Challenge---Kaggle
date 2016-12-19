@@ -8,6 +8,8 @@ import sklearn.preprocessing as process
 import sklearn.ensemble as ensemble
 import sklearn.multiclass as multiclass
 
+import pickle
+
 #Fetching data
 print "Fetching data..."
 train_set = pd.DataFrame.from_csv('../data/subset_train_OHE.csv')
@@ -92,6 +94,9 @@ ask_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.Ad
 ask_cluster_classifier_ada.fit(trainFeatures, all_ask_labels)
 print "Ask accuracy with AdaBoost Classifier: ", ask_cluster_classifier_ada.score(trainFeatures, all_ask_labels)
 
+ada = {'bid': bid_cluster_classifier_ada, 'ask': ask_cluster_classifier_ada}
+with open('../run_models/clusterAndClassify_Ada.model', 'wb') as output:
+	pickle.dump(ada, output, -1)
 
 bid_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensemble.BaggingClassifier(base_estimator=None, 
 	n_estimators=10,
@@ -123,6 +128,9 @@ ask_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensembl
 ask_cluster_classifier_bagging.fit(trainFeatures, all_ask_labels)
 print "Ask accuracy with Bagging: ", ask_cluster_classifier_bagging.score(trainFeatures, all_ask_labels)
 
+bag = {'bid': bid_cluster_classifier_bagging, 'ask': ask_cluster_classifier_bagging}
+with open('../run_models/clusterAndClassify_Bagging.model', 'wb') as output:
+	pickle.dump(bag, output, -1)
 
 bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=10,
 	criterion='gini',
@@ -163,3 +171,7 @@ ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.Ra
 	n_jobs=-1)
 ask_cluster_classifier_rfc.fit(trainFeatures, all_ask_labels)
 print "Ask accuracy with Random Forest: ", ask_cluster_classifier_rfc.score(trainFeatures, all_ask_labels)
+
+rfc = {'bid': bid_cluster_classifier_rfc, 'ask': ask_cluster_classifier_rfc}
+with open('../run_models/clusterAndClassify_RFC.model', 'wb') as output:
+	pickle.dump(rfc, output, -1)
