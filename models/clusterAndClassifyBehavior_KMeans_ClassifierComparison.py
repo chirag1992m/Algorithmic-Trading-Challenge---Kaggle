@@ -76,7 +76,7 @@ all_ask_labels = all_ask_cluster_model.predict(all_ask_prices_nm)
 
 #Classifying on the basis of clusters
 print "Classifying..."
-bid_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.AdaBoostClassifier(base_estimator=None,
+'''bid_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.AdaBoostClassifier(base_estimator=None,
 	n_estimators=50,
 	learning_rate=1.0,
 	algorithm='SAMME.R',
@@ -130,9 +130,9 @@ print "Ask accuracy with Bagging: ", ask_cluster_classifier_bagging.score(trainF
 
 bag = {'bid': bid_cluster_classifier_bagging, 'ask': ask_cluster_classifier_bagging}
 with open('../run_models/clusterAndClassify_Bagging.model', 'wb') as output:
-	pickle.dump(bag, output, -1)
+	pickle.dump(bag, output, -1)'''
 
-bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=10,
+bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=20,
 	criterion='gini',
 	max_depth=None,
 	min_samples_split=2,
@@ -152,7 +152,7 @@ bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.Ra
 bid_cluster_classifier_rfc.fit(trainFeatures, all_bid_labels)
 print "Bid accuracy with Random Forest: ", bid_cluster_classifier_rfc.score(trainFeatures, all_bid_labels)
 
-ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=10,
+ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=20,
 	criterion='gini',
 	max_depth=None,
 	min_samples_split=2,
