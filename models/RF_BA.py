@@ -30,9 +30,9 @@ predictionColumns = bidPredictionColumns + askPredictionColumns
 
 featureColumns = []
 columnsToIgnore = []
-	for column in train_table.columns.values:
-		if ((column not in predictionColumns) and (column not in columnsToIgnore) and (not column.startswith('time'))):
-			featureColumns.append(column)
+for column in train_table.columns.values:
+	if ((column not in predictionColumns) and (column not in columnsToIgnore) and (not column.startswith('time'))):
+		featureColumns.append(column)
 
 trainX = np.zeros((train_table.shape[0], len(featureColumns)))
 
