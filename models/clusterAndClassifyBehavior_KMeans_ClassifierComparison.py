@@ -32,7 +32,7 @@ all_ask_prices_nm = process.scale(all_ask_prices, axis=1)
 
 #Generating the clusters
 print "Modelling Clusters..."
-all_clusters = 4
+clusters = 4
 all_bid_cluster_model = cluster.KMeans(n_clusters=clusters,
 	init='k-means++',
 	n_init=10,
