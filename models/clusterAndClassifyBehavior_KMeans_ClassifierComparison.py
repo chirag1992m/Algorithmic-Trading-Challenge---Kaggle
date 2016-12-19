@@ -81,7 +81,7 @@ bid_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.Ad
 	random_state=None),
 	n_jobs=-1)
 bid_cluster_classifier_ada.fit(trainFeatures, all_bid_labels)
-print "Bid accuracy with AdaBoost: ", bid_cluster_classifier.score(trainFeatures, all_bid_labels)
+print "Bid accuracy with AdaBoost: ", bid_cluster_classifier_ada.score(trainFeatures, all_bid_labels)
 
 ask_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.AdaBoostClassifier(base_estimator=None,
 	n_estimators=50,
@@ -90,7 +90,7 @@ ask_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.Ad
 	random_state=None),
 	n_jobs=-1)
 ask_cluster_classifier_ada.fit(trainFeatures, all_ask_labels)
-print "Ask accuracy with AdaBoost Classifier: ", ask_cluster_classifier.score(trainFeatures, all_ask_labels)
+print "Ask accuracy with AdaBoost Classifier: ", ask_cluster_classifier_ada.score(trainFeatures, all_ask_labels)
 
 
 bid_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensemble.BaggingClassifier(base_estimator=None, 
@@ -106,7 +106,7 @@ bid_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensembl
 	verbose=1),
 	n_jobs=-1)
 bid_cluster_classifier_bagging.fit(trainFeatures, all_bid_labels)
-print "Bid accuracy with Bagging: ", bid_cluster_classifier.score(trainFeatures, all_bid_labels)
+print "Bid accuracy with Bagging: ", bid_cluster_classifier_bagging.score(trainFeatures, all_bid_labels)
 
 ask_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensemble.BaggingClassifier(base_estimator=None, 
 	n_estimators=10,
@@ -121,7 +121,7 @@ ask_cluster_classifier_bagging = multiclass.OneVsOneClassifier(estimator=ensembl
 	verbose=1),
 	n_jobs=-1)
 ask_cluster_classifier_bagging.fit(trainFeatures, all_ask_labels)
-print "Ask accuracy with Bagging: ", ask_cluster_classifier.score(trainFeatures, all_ask_labels)
+print "Ask accuracy with Bagging: ", ask_cluster_classifier_bagging.score(trainFeatures, all_ask_labels)
 
 
 bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=10,
@@ -142,7 +142,7 @@ bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.Ra
 	class_weight=None),
 	n_jobs=-1)
 bid_cluster_classifier_rfc.fit(trainFeatures, all_bid_labels)
-print "Bid accuracy with Random Forest: ", bid_cluster_classifier.score(trainFeatures, all_bid_labels)
+print "Bid accuracy with Random Forest: ", bid_cluster_classifier_rfc.score(trainFeatures, all_bid_labels)
 
 ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=10,
 	criterion='gini',
@@ -162,4 +162,4 @@ ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.Ra
 	class_weight=None),
 	n_jobs=-1)
 ask_cluster_classifier_rfc.fit(trainFeatures, all_ask_labels)
-print "Ask accuracy with Random Forest: ", ask_cluster_classifier.score(trainFeatures, all_ask_labels)
+print "Ask accuracy with Random Forest: ", ask_cluster_classifier_rfc.score(trainFeatures, all_ask_labels)
