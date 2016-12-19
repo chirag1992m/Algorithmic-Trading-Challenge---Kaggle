@@ -30,6 +30,19 @@ all_ask_prices = np.array(train_set[all_ask_columns])
 all_bid_prices_nm = process.scale(all_bid_prices, axis=1)
 all_ask_prices_nm = process.scale(all_ask_prices, axis=1)
 
+predictionColumns = []
+for i in range(51, 101):
+	for column in train_set.columns.values:
+		if column.endswith(str(i)) and (column.startswith('ask') or column.startswith('bid')):
+			predictionColumns.append(column)
+
+feature_columns = []
+for column in train_set.columns.values:
+	if (column not in feature_columns) and (column != 'row_id') and (not column.startswith('time')):
+		feature_columns.append(column)
+
+trainFeatures = np.array(train_set[feature_columns])
+
 #Generating the clusters
 print "Modelling Clusters..."
 clusters = 4
