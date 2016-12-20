@@ -22,6 +22,7 @@ for i in range(52, 101):
 		if column.endswith(str(i)) and column.startswith('ask'):
 			askPredictionColumns.append(column)
 
+predictionColumns = bidPredictionColumns + askPredictionColumns
 
 featureColumns = []
 columnsToIgnore = ['row_id']
