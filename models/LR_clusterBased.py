@@ -157,15 +157,15 @@ for i in range(all_clusters):
     
     model_bid = lm.LinearRegression(fit_intercept=True, normalize=False, n_jobs=1)
     model_bid.fit(trainX[all_bid_labels == i, :], trainY_bid[all_bid_labels == i])
-    models_ask.append(model_bid)
+    models_bid.append(model_bid)
 
 
 print "Predicting Labels..."
 testX_ask_labels = ask_cluster_classifier.predict(testX)
 testX_bid_labels = bid_cluster_classifier.predict(testX)
 
-testY_ask = np.zeros((textX.shape[0]))
-testY_ask = np.zeros((textX.shape[0]))
+testY_ask = np.zeros((testX.shape[0]))
+testY_bid = np.zeros((testX.shape[0]))
 
 print "Predicting Bid-Ask..."
 for i in range(all_clusters):
