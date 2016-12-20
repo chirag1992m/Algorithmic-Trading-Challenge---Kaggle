@@ -40,7 +40,7 @@ for i in range(51, 101):
 
 feature_columns = []
 for column in train_set.columns.values:
-	if (column not in feature_columns) and (column != 'row_id') and (not column.startswith('time')):
+	if (column not in predictionColumns) and (column != 'row_id') and (not column.startswith('time')):
 		feature_columns.append(column)
 
 trainFeatures = np.array(train_set[feature_columns])
@@ -76,7 +76,7 @@ all_ask_labels = all_ask_cluster_model.predict(all_ask_prices_nm)
 
 #Classifying on the basis of clusters
 print "Classifying..."
-'''bid_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.AdaBoostClassifier(base_estimator=None,
+bid_cluster_classifier_ada = multiclass.OneVsOneClassifier(estimator=ensemble.AdaBoostClassifier(base_estimator=None,
 	n_estimators=50,
 	learning_rate=1.0,
 	algorithm='SAMME.R',
@@ -130,7 +130,7 @@ print "Ask accuracy with Bagging: ", ask_cluster_classifier_bagging.score(trainF
 
 bag = {'bid': bid_cluster_classifier_bagging, 'ask': ask_cluster_classifier_bagging}
 with open('../run_models/clusterAndClassify_Bagging.model', 'wb') as output:
-	pickle.dump(bag, output, -1)'''
+	pickle.dump(bag, output, -1)
 
 bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=30,
 	criterion='gini',
