@@ -123,8 +123,8 @@ bid_cluster_classifier = multiclass.OneVsOneClassifier(estimator=ensemble.Random
 	warm_start=False,
 	class_weight=None),
 	n_jobs=-1)
-bid_cluster_classifier.fit(trainFeatures, all_bid_labels)
-print "Bid accuracy with Random Forest: ", bid_cluster_classifier_rfc.score(trainFeatures, all_bid_labels)
+bid_cluster_classifier.fit(trainX, all_bid_labels)
+print "Bid accuracy with Random Forest: ", bid_cluster_classifier.score(trainX, all_bid_labels)
 
 ask_cluster_classifier = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=30,
 	criterion='gini',
@@ -142,7 +142,8 @@ ask_cluster_classifier = multiclass.OneVsOneClassifier(estimator=ensemble.Random
 	warm_start=False,
 	class_weight=None),
 	n_jobs=-1)
-ask_cluster_classifier.fit(trainFeatures, all_ask_labels)
+ask_cluster_classifier.fit(trainX, all_ask_labels)
+print "Ask accuracy with Random Forest: ", ask_cluster_classifier.score(trainX, all_ask_labels)
 
 
 print "Training..."
