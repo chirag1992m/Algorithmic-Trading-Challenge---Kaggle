@@ -112,10 +112,10 @@ print "Predicting..."
 testY_ask = []
 testY_bid = []
 for i in range(len(ranges)):
-	testY_ask_temp = ask_models[i].predict(testX[i])
+	testY_ask_temp = models_ask[i].predict(testX[i])
 	testY_ask.append(testY_ask_temp)
 
-	testY_bid_temp = bid_models[i].predict(testX[i])
+	testY_bid_temp = models_bid[i].predict(testX[i])
 	testY_bid.append(testY_bid_temp)
 
 	print "predicted ", i
