@@ -132,7 +132,7 @@ bag = {'bid': bid_cluster_classifier_bagging, 'ask': ask_cluster_classifier_bagg
 with open('../run_models/clusterAndClassify_Bagging.model', 'wb') as output:
 	pickle.dump(bag, output, -1)'''
 
-bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=20,
+bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=30,
 	criterion='gini',
 	max_depth=None,
 	min_samples_split=2,
@@ -152,7 +152,7 @@ bid_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.Ra
 bid_cluster_classifier_rfc.fit(trainFeatures, all_bid_labels)
 print "Bid accuracy with Random Forest: ", bid_cluster_classifier_rfc.score(trainFeatures, all_bid_labels)
 
-ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=20,
+ask_cluster_classifier_rfc = multiclass.OneVsOneClassifier(estimator=ensemble.RandomForestClassifier(n_estimators=30,
 	criterion='gini',
 	max_depth=None,
 	min_samples_split=2,
