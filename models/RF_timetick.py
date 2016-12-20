@@ -31,7 +31,7 @@ for column in train_table.columns.values:
 		featureColumns.append(column)
 
 print "Creating Predictors..."
-modelTill = 20
+modelTill = 10
 
 trainX = np.zeros((train_table.shape[0] * modelTill, len(featureColumns) + 1))
 
