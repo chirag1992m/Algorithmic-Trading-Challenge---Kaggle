@@ -137,12 +137,12 @@ for ix, row in test_table.iterrows():
 	index_in_pred = prediction[prediction['row_id'] == row_id].index.tolist()[0]
 
 	for i in range(len(ranges)):
-	bid = testY_bid[i][index]
-	ask = testY_ask[i][index]
+		bid = testY_bid[i][index]
+		ask = testY_ask[i][index]
 
-	for k in ranges[i]:
-		prediction.set_value(index_in_pred, 'bid' + str(k), bid)
-		prediction.set_value(index_in_pred, 'ask' + str(k), ask)
+		for k in ranges[i]:
+			prediction.set_value(index_in_pred, 'bid' + str(k), bid)
+			prediction.set_value(index_in_pred, 'ask' + str(k), ask)
 	index = index+1
 
 prediction.to_csv('../predictions/LR_timeslots.csv')
