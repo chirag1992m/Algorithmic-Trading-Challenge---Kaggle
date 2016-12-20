@@ -7,6 +7,7 @@ from scipy.interpolate import interp1d #for smooth line plots
 import sklearn.preprocessing as process
 import sklearn.ensemble as ensemble
 import sklearn.multiclass as multiclass
+from sklearn import linear_model as lm
 
 print "Loading data..."
 train_table = pd.DataFrame.from_csv('../data/subset_train_OHE.csv')
