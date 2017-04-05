@@ -3,6 +3,8 @@
 ## CSCI-GA.2566-001
 ## Term Project
 
+## [Report](http://digital-madness.in/projects/NYU_sem1_FML_PROJECT.zip)
+
 ### Introduction
 The aim of the Kaggle challenge `Algorithmic Trading Challenge` is to architect emprical models to predict market response to large trades. The challenge is already closed and has been picked up for learning purposes and as the term project for the course Foundations of Machine Learning at NYU Courant in Fall 2016.
 
