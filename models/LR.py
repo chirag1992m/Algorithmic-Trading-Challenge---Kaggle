@@ -33,7 +33,7 @@ trainY = np.zeros((train_table.shape[0] * 2))
 
 testX = np.zeros((test_table.shape[0] * 2, len(featureColumns) + 1))
 
-print "Creating Predictors..."
+print ("Creating Predictors...");
 index = 0
 for ix, row in train_table.iterrows():
 	X_features = (np.array(row[featureColumns])).flatten('F')
@@ -65,7 +65,7 @@ for ix, row in test_table.iterrows():
 
 
 #Make the model and fit
-print "Training..."
+print ("Training...");
 LR_model = lm.LinearRegression(fit_intercept=True, normalize=False, n_jobs=-1)
 LR_model.fit(trainX, trainY)
 
@@ -96,4 +96,4 @@ for ix, row in test_table.iterrows():
 
 prediction.to_csv('../predictions/LR.csv')
 
-print "Done!"
+print ("Done!");
